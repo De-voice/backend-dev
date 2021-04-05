@@ -41,22 +41,27 @@ const createUser = (req, res) => {
 };;
 
 const getUsers = async (req, res) => {
-  await User.find({}, (err, users) => {
-		if (err) {
-			return res.status(400).json({ error: err, success: false });
-		}
-		if (!users.length) {
-			return res.status(400).json({
-				success: false,
-				message: "users not found",
-			});
-		}
+	try {
+		await User.find({}, (err, users) => {
+			if (err) {
+				return res.status(400).json({ error: err, success: false });
+			}
+			if (!users.length) {
+				return res.status(400).json({
+					success: false,
+					message: "users not found",
+				});
+			}
 
-		return res.status(200).json({
-			success: true,
-			data: users,
+			return res.status(200).json({
+				success: true,
+				data: users,
+			});
 		});
-	}).catch((err) => console.log(err));
+	} catch (error) {
+		console.log(error);
+	}
+ 
 };
 
 module.exports = { createUser,getUsers };
