@@ -4,7 +4,7 @@ mongoose.connect(
 	process.env.DATABASE_HOST,
 	{ useUnifiedTopology: true, useNewUrlParser: true },
 	() => {
-		console.log("contected");
+		console.log("connected");
 	}
 );
 
